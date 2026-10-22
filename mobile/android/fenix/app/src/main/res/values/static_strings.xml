@@ -450,6 +450,9 @@
     <!-- Label for the Customize Home preference to show the weather widget on the homepage. -->
     <string name="customize_toggle_weather" translatable="false">Weather</string>
 
+    <!-- Label for the Customize Home preference to show the Wrexham AFC widget on the homepage. -->
+    <string name="customize_toggle_wrexham" translatable="false">Wrexham AFC</string>
+
     <!--  Firefox brand name  -->
     <string name="app_name_firefox" tools:ignore="BrandUsage">Firefox</string>
 

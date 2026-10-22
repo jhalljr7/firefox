@@ -24,6 +24,10 @@
       android:title="@string/customize_toggle_weather" />
 
     <androidx.preference.SwitchPreferenceCompat
+      android:key="@string/pref_key_show_homepage_wrexham_widget"
+      android:title="@string/customize_toggle_wrexham" />
+
+    <androidx.preference.SwitchPreferenceCompat
         android:key="@string/pref_key_privacy_report"
         android:title="@string/customize_toggle_privacy_report" />
 

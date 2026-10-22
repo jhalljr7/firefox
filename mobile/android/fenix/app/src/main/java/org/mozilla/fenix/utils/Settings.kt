@@ -2687,6 +2687,20 @@ class Settings(
             default = true,
         )
 
+    /** Indicates if the Homepage Wrexham AFC Widget is enabled. */
+    var enableHomepageWrexhamWidget by
+        booleanPreference(
+            key = appContext.getPreferenceKey(R.string.pref_key_enable_homepage_wrexham_widget),
+            default = { FxNimbus.features.homepageWrexhamWidget.value().enabled },
+        )
+
+    /** Indicates if the Homepage Wrexham AFC Widget should be visible on the homepage. */
+    var showHomepageWrexhamWidget by
+        booleanPreference(
+            key = appContext.getPreferenceKey(R.string.pref_key_show_homepage_wrexham_widget),
+            default = true,
+        )
+
     /** Adjust Activated User sent */
     var growthUserActivatedSent by
         booleanPreference(

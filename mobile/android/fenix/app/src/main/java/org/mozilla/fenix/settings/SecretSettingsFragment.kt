@@ -24,6 +24,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.preference.EditTextPreference
+import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
@@ -42,6 +43,7 @@ import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.ext.requireComponents
 import org.mozilla.fenix.ext.showToolbar
 import org.mozilla.fenix.ext.showToolbarWithIconButton
+import org.mozilla.fenix.home.wrexham.WrexhamScenario
 import org.mozilla.fenix.theme.FirefoxTheme
 import org.mozilla.fenix.utils.SecretSettingsPrefDefaults
 import org.mozilla.gecko.search.SearchWidgetProvider
@@ -213,6 +215,16 @@ class SecretSettingsFragment : PreferenceFragmentCompat(), SystemInsetsPaddedFra
         requirePreference<SwitchPreferenceCompat>(R.string.pref_key_enable_homepage_weather_widget).apply {
             isChecked = settings.enableHomepageWeatherWidget
             onPreferenceChangeListener = SharedPreferenceUpdater()
+        }
+
+        requirePreference<ListPreference>(R.string.pref_key_wrexham_widget_scenario).apply {
+            entries = WrexhamScenario.entries.map { it.label }.toTypedArray()
+            entryValues = WrexhamScenario.entries.map { it.name }.toTypedArray()
+            value = settings.wrexhamWidgetScenario
+            setOnPreferenceChangeListener { _, newValue ->
+                settings.wrexhamWidgetScenario = newValue as String
+                true
+            }
         }
 
         requirePreference<SwitchPreferenceCompat>(R.string.pref_key_enable_ads_client_for_stories).apply {

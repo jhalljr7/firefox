@@ -63,6 +63,7 @@ import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.ext.getPreferenceKey
 import org.mozilla.fenix.home.pocket.ContentRecommendationsFeatureHelper
 import org.mozilla.fenix.home.topsites.TopSitesConfigConstants.TOP_SITES_MAX_COUNT
+import org.mozilla.fenix.home.wrexham.WrexhamScenario
 import org.mozilla.fenix.nimbus.DefaultBrowserPrompt
 import org.mozilla.fenix.nimbus.FxNimbus
 import org.mozilla.fenix.nimbus.HomeScreenSection
@@ -2699,6 +2700,13 @@ class Settings(
         booleanPreference(
             key = appContext.getPreferenceKey(R.string.pref_key_show_homepage_wrexham_widget),
             default = true,
+        )
+
+    /** Dummy data scenario shown by the Homepage Wrexham AFC Widget prototype. */
+    var wrexhamWidgetScenario by
+        stringPreference(
+            key = appContext.getPreferenceKey(R.string.pref_key_wrexham_widget_scenario),
+            default = WrexhamScenario.UPCOMING.name,
         )
 
     /** Adjust Activated User sent */

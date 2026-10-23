@@ -28,6 +28,7 @@ import org.mozilla.fenix.home.topsites.calculateTopSitesRowLayout
 import org.mozilla.fenix.home.topsites.collapsedTopSitesCount
 import org.mozilla.fenix.home.ui.horizontalMargin
 import org.mozilla.fenix.home.wrexham.WrexhamFakeData
+import org.mozilla.fenix.home.wrexham.WrexhamScenario
 import org.mozilla.fenix.home.wrexham.WrexhamWidgetState
 import org.mozilla.fenix.termsofuse.store.PrivacyNoticeBannerState
 import org.mozilla.fenix.utils.Settings
@@ -241,7 +242,10 @@ internal sealed class HomepageState {
                             BOTTOM_PADDING_BOTTOM_TOOLBAR
                         },
                     wrexhamWidgetState =
-                        WrexhamFakeData.upcoming.takeIf {
+                        WrexhamFakeData.forScenario(
+                            WrexhamScenario.entries.firstOrNull { it.name == settings.wrexhamWidgetScenario }
+                                ?: WrexhamScenario.UPCOMING,
+                        ).takeIf {
                             settings.enableHomepageWrexhamWidget && settings.showHomepageWrexhamWidget
                         },
                 )

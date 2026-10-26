@@ -19,6 +19,7 @@ package org.mozilla.fenix.sports
  * @property onShare Shares a match, or the club when null.
  * @property onRemove Hides the widget.
  * @property onRefresh Retries loading match data.
+ * @property onDemoScenarios Opens the demo scenario picker. Debug builds only; null hides the menu item.
  */
 data class ClubWidgetActions(
     val onOpenUrl: (String) -> Unit = {},
@@ -26,4 +27,5 @@ data class ClubWidgetActions(
     val onShare: (Match?) -> Unit = {},
     val onRemove: () -> Unit = {},
     val onRefresh: () -> Unit = {},
+    val onDemoScenarios: (() -> Unit)? = null,
 )

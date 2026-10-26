@@ -71,9 +71,11 @@ What that means for the fields:
 
 ## Trying it
 
-In a debug build:
-1. Turn on Settings > Homepage > Wrexham AFC.
-2. Pick a state under Secret Settings > "Wrexham widget scenario". "Goal celebration", "Winner celebration", "FA Cup shootout (plays out)" and "Live, Wrexham scores (plays out)" animate.
+In a debug build, the widget is on the homepage under the shortcuts (Settings > Homepage > Wrexham AFC turns it on or off).
+
+To switch states, open the card's ⋮ menu and choose **Demo: switch scenario**, below the divider. The card changes straight away. "Goal celebration", "Winner celebration", "FA Cup shootout (plays out)" and "Live, Wrexham scores (plays out)" animate.
+
+The demo item only exists in debug builds. Secret Settings > "Wrexham widget scenario" sets the same thing.
 
 ## Checks
 

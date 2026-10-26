@@ -11,6 +11,9 @@
     <string name="sports_menu_wallpapers">Wallpapers</string>
     <string name="sports_menu_share">Share</string>
     <string name="sports_menu_remove">Remove Widget</string>
+    <!-- Demo builds only: opens a picker of dummy widget states. -->
+    <string name="sports_menu_demo">Demo: switch scenario</string>
+    <string name="sports_demo_picker_title">Demo scenario</string>
 
     <!-- Buttons on a sports widget. -->
     <string name="sports_full_calendar">Full Calendar</string>

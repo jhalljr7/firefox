@@ -314,8 +314,9 @@ private fun Header(
 }
 
 /**
- * The overflow menu in the design's order, using the app's standard dropdown. Picking an item closes the menu first.
- * Matches uses the design's soccer-ball icon; the rest use Firefox icons.
+ * The overflow menu in the design's order, using the app's standard dropdown, plus a demo-only scenario switcher below
+ * a divider when [ClubWidgetActions.onDemoScenarios] is set. Picking an item closes the menu first. Matches uses the
+ * design's soccer-ball icon; the rest use Firefox icons.
  */
 @Composable
 private fun ClubMenu(
@@ -339,7 +340,7 @@ private fun ClubMenu(
 
     DropdownMenu(
         menuItems =
-            listOf(
+            listOfNotNull(
                 item(R.string.sports_menu_matches, R.drawable.sports_ic_soccer_ball) {
                     actions.onOpenUrl(club.matchesUrl)
                 },
@@ -355,6 +356,11 @@ private fun ClubMenu(
                 },
                 item(R.string.sports_menu_remove, iconsR.drawable.mozac_ic_delete_24, critical = true) {
                     actions.onRemove()
+                },
+                // Demo builds only: a labelled, walled-off way to switch dummy scenarios from the card itself.
+                actions.onDemoScenarios?.let { MenuItem.Divider },
+                actions.onDemoScenarios?.let { openPicker ->
+                    item(R.string.sports_menu_demo, iconsR.drawable.mozac_ic_labs_24) { openPicker() }
                 },
             ),
         expanded = expanded,

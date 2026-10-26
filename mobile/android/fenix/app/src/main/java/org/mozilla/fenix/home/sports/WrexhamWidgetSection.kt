@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.Navigation
 import mozilla.components.support.ktx.android.content.share
+import org.mozilla.fenix.Config
 import org.mozilla.fenix.NavGraphDirections
 import org.mozilla.fenix.R
 import org.mozilla.fenix.components.appstate.AppAction.WrexhamWidgetAction
@@ -34,6 +35,8 @@ import org.mozilla.fenix.sports.ClubWidgetState
 import org.mozilla.fenix.sports.R as sportsR
 import org.mozilla.fenix.sports.RemovedClubWidgetRow
 import org.mozilla.fenix.sports.Wrexham
+import org.mozilla.fenix.sports.WrexhamScenario
+import org.mozilla.fenix.sports.WrexhamScenarioPicker
 
 /**
  * The homepage's Wrexham AFC widget: the app-side glue around the sports module's [ClubWidget]. It wires the card's
@@ -63,6 +66,21 @@ fun WrexhamWidgetSection(
     if (removed) {
         RemovedClubWidgetRow(club = Wrexham, onUndo = { removed = false }, modifier = modifier)
         return
+    }
+
+    // Debug builds only: the menu's "Demo: switch scenario" item opens this picker. A pick saves the same setting
+    // Secret Settings uses and forces a reload, so the card switches straight away.
+    var pickingScenario by remember { mutableStateOf(false) }
+    if (pickingScenario) {
+        WrexhamScenarioPicker(
+            current = WrexhamScenario.from(components.settings.wrexhamWidgetScenario),
+            onPick = {
+                components.settings.wrexhamWidgetScenario = it.name
+                components.appStore.dispatch(WrexhamWidgetAction.Refresh(force = true))
+                pickingScenario = false
+            },
+            onDismiss = { pickingScenario = false },
+        )
     }
 
     ClubWidget(
@@ -96,6 +114,7 @@ fun WrexhamWidgetSection(
                 },
                 onRemove = { removed = true },
                 onRefresh = { components.appStore.dispatch(WrexhamWidgetAction.Refresh(force = true)) },
+                onDemoScenarios = { pickingScenario = true }.takeIf { Config.channel.isDebug },
             ),
     )
 }

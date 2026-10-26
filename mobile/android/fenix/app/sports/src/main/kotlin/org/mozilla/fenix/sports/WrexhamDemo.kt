@@ -6,7 +6,7 @@
  * DEMO ONLY / WREXHAM SCENARIOS: the dummy states shown until the Merino club endpoint exists.
  *
  * What: one [WrexhamScenario] per design state from the Android PDF; [FakeWrexhamRepository] serves
- * whichever one is picked in Secret Settings.
+ * whichever one is picked in Secret Settings or in [WrexhamScenarioPicker] (the widget menu's demo item).
  * Used by: the app's Components.kt (the repository), SecretSettingsFragment (the scenario list) and
  * Settings (the saved choice).
  * Remove with DemoScript.kt once real data exists; Components.kt then passes a MerinoSportsRepository.
@@ -14,9 +14,22 @@
 
 package org.mozilla.fenix.sports
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
+import mozilla.components.compose.base.button.RadioButton
 
 /**
  * Dummy scenarios for the Wrexham widget, used until the Merino club endpoint exists. Switch between them in Secret
@@ -65,6 +78,40 @@ enum class WrexhamScenario(
         /** The scenario saved under [name] in settings, or [UPCOMING] if there is none. */
         fun from(name: String?): WrexhamScenario = entries.firstOrNull { it.name == name } ?: UPCOMING
     }
+}
+
+/**
+ * Demo builds only: a picker of all [WrexhamScenario]s, opened from the widget's menu so anyone trying the build can
+ * switch states (and trigger the celebrations) without digging into Secret Settings.
+ *
+ * @param current The scenario on screen now, shown as selected.
+ * @param onPick Called with the chosen scenario.
+ * @param onDismiss Called when the picker is closed without a choice.
+ */
+@Composable
+fun WrexhamScenarioPicker(
+    current: WrexhamScenario,
+    onPick: (WrexhamScenario) -> Unit,
+    onDismiss: () -> Unit,
+) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        confirmButton = {},
+        title = { Text(stringResource(R.string.sports_demo_picker_title)) },
+        text = {
+            Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
+                WrexhamScenario.entries.forEach { scenario ->
+                    Row(
+                        modifier = Modifier.fillMaxWidth().clickable { onPick(scenario) },
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        RadioButton(selected = scenario == current, onClick = { onPick(scenario) })
+                        Text(text = scenario.label, style = SportsTheme.typography.body2)
+                    }
+                }
+            }
+        },
+    )
 }
 
 /** Dummy data for one [WrexhamScenario], so the scenarios are always visible in the debug build. */

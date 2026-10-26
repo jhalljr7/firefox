@@ -41,10 +41,31 @@ import org.mozilla.fenix.ipprotection.ui.IPProtectionSnackbarBinding
 import org.mozilla.fenix.library.history.PendingDeletionHistory
 import org.mozilla.fenix.messaging.MessagingState
 import org.mozilla.fenix.snackbar.SnackbarBinding
+import org.mozilla.fenix.sports.ClubWidgetState
 import org.mozilla.fenix.wallpapers.Wallpaper
 
 /** [Action] implementation related to [AppStore]. */
 sealed class AppAction : Action {
+    /** [AppAction] implementations for the Wrexham AFC homepage widget (see `WrexhamWidgetMiddleware`). */
+    sealed class WrexhamWidgetAction : AppAction() {
+        /**
+         * Asks for fresh widget data. Throttled unless [force] is set.
+         *
+         * @property force Skips the minimum gap between requests, for an explicit user retry.
+         */
+        data class Refresh(val force: Boolean = false) : WrexhamWidgetAction()
+
+        /**
+         * New widget data has loaded.
+         *
+         * @property state The loaded state.
+         */
+        data class Loaded(val state: ClubWidgetState) : WrexhamWidgetAction()
+
+        /** A load failed (offline, network or server error). Keeps any data already shown. */
+        data object Failed : WrexhamWidgetAction()
+    }
+
     /**
      * Updates the [AppState.inactiveTabsExpanded] boolean
      *

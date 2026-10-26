@@ -43,7 +43,7 @@ import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.ext.requireComponents
 import org.mozilla.fenix.ext.showToolbar
 import org.mozilla.fenix.ext.showToolbarWithIconButton
-import org.mozilla.fenix.home.wrexham.WrexhamScenario
+import org.mozilla.fenix.sports.WrexhamScenario
 import org.mozilla.fenix.theme.FirefoxTheme
 import org.mozilla.fenix.utils.SecretSettingsPrefDefaults
 import org.mozilla.gecko.search.SearchWidgetProvider

@@ -29,6 +29,8 @@ import org.mozilla.fenix.messaging.state.MessagingReducer
 import org.mozilla.fenix.reviewprompt.ReviewPromptReducer
 import org.mozilla.fenix.search.VoiceSearchReducer
 import org.mozilla.fenix.share.ShareActionReducer
+import org.mozilla.fenix.sports.ClubWidgetState
+import org.mozilla.fenix.sports.SportsContent
 
 /** Reducer for [AppStore]. */
 internal object AppStoreReducer {
@@ -47,6 +49,11 @@ internal object AppStoreReducer {
             is AppAction.RemoveAllNonFatalCrashes -> state.copy(nonFatalCrashes = emptyList())
 
             is AppAction.MessagingAction -> MessagingReducer.reduce(state, action)
+            is AppAction.WrexhamWidgetAction.Refresh -> state
+            is AppAction.WrexhamWidgetAction.Loaded -> state.copy(wrexhamWidgetState = action.state)
+            // Keep showing the last good data; the error card is only for when there's nothing to show yet.
+            is AppAction.WrexhamWidgetAction.Failed ->
+                state.copy(wrexhamWidgetState = state.wrexhamWidgetState ?: ClubWidgetState(SportsContent.Error))
 
             is AppAction.Change ->
                 state.copy(

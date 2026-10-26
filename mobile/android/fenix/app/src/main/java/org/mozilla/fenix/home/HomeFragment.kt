@@ -151,6 +151,7 @@ import org.mozilla.fenix.home.sessioncontrol.DefaultSessionControlController
 import org.mozilla.fenix.home.sessioncontrol.SessionControlController
 import org.mozilla.fenix.home.sessioncontrol.SessionControlControllerCallback
 import org.mozilla.fenix.home.sessioncontrol.SessionControlInteractor
+import org.mozilla.fenix.home.sports.refreshWrexhamWidgetWhileResumed
 import org.mozilla.fenix.home.store.HomeToolbarStoreBuilder
 import org.mozilla.fenix.home.store.HomepageState
 import org.mozilla.fenix.home.termsofuse.DefaultPrivacyNoticeBannerController
@@ -568,6 +569,11 @@ class HomeFragment : Fragment(), UserInteractionHandler, OnLongPressedListener {
         super.onViewCreated(view, savedInstanceState)
 
         recordHomepageTelemetry()
+
+        // Wrexham AFC widget prototype: keep its data fresh while the homepage is on screen (see home/sports/).
+        viewLifecycleOwner.refreshWrexhamWidgetWhileResumed(requireComponents.appStore) {
+            requireComponents.settings.run { enableHomepageWrexhamWidget && showHomepageWrexhamWidget }
+        }
 
         observePrivateModeLock {
             findNavController()

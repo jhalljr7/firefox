@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+<resources>
+    <!-- Overflow menu on a sports widget. -->
+    <string name="sports_menu_content_description">%1$s widget menu</string>
+    <string name="sports_menu_matches">Matches</string>
+    <string name="sports_menu_results">Results</string>
+    <string name="sports_menu_standings">Standings</string>
+    <string name="sports_menu_wallpapers">Wallpapers</string>
+    <string name="sports_menu_share">Share</string>
+    <string name="sports_menu_remove">Remove Widget</string>
+
+    <!-- Buttons on a sports widget. -->
+    <string name="sports_full_calendar">Full Calendar</string>
+    <string name="sports_refresh">Refresh</string>
+    <string name="sports_see_results">See Results</string>
+
+    <!-- Message states. -->
+    <string name="sports_no_upcoming_subtitle">Check the full calendar for what’s next.</string>
+    <string name="sports_error_title">Match info is not available right now</string>
+    <string name="sports_error_subtitle">Try refreshing in a few minutes.</string>
+    <string name="sports_season_over_subtitle">Stay tuned for what’s next.</string>
+    <string name="sports_wrexham_no_upcoming">The men’s team has no upcoming games.</string>
+    <string name="sports_wrexham_season_over">That’s a wrap on the EFL Championship.</string>
+
+    <!-- Shared text for a match: home team, away team, competition, link. -->
+    <string name="sports_share_match">%1$s vs %2$s, %3$s: %4$s</string>
+    <!-- Shared text for a club: club name, link. -->
+    <string name="sports_share_club">%1$s: %2$s</string>
+
+    <!-- Shown in place of a widget right after it's removed. %1$s is the club name. -->
+    <string name="sports_widget_removed">%1$s widget removed</string>
+    <string name="sports_undo">Undo</string>
+
+    <!-- Match status. -->
+    <string name="sports_tag_live">LIVE</string>
+    <string name="sports_tag_delayed">Delayed</string>
+    <string name="sports_tag_suspended">Suspended</string>
+    <string name="sports_tag_postponed">Postponed</string>
+    <string name="sports_today">Today</string>
+    <string name="sports_tomorrow">Tomorrow</string>
+    <!-- %1$s is the match minute, e.g. "29" or "90+3". -->
+    <string name="sports_clock">%1$s′</string>
+    <string name="sports_halftime">Halftime</string>
+    <!-- %1$s is the match minute in extra time, e.g. "112". -->
+    <string name="sports_extra_time_clock">ET %1$s′</string>
+    <string name="sports_full_time">FT</string>
+    <!-- %1$d and %2$d are the home and away shootout goals. -->
+    <string name="sports_penalties">%1$d - %2$d\n(Penalties)</string>
+    <string name="sports_full_time_penalties">%1$d - %2$d\n(FT - Penalties)</string>
+    <!-- %1$s is the new kickoff time. -->
+    <string name="sports_delayed_starting">Starting\n%1$s</string>
+    <!-- Score for screen readers: home team, home goals, away team, away goals. -->
+    <string name="sports_score_content_description">%1$s %2$d, %3$s %4$d</string>
+    <string name="sports_red_card_content_description">Red card</string>
+
+    <!-- Goal celebration banner. -->
+    <string name="sports_goal_banner">GOAL!</string>
+</resources>

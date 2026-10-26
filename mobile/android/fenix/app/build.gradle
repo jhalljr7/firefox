@@ -472,6 +472,7 @@ nimbus {
 
 dependencies {
     implementation project('longfox')
+    implementation project('sports')
     implementation project(':components:browser-engine-gecko')
     implementation project(':components:compose-awesomebar')
     implementation project(':components:compose-base')
@@ -829,7 +830,7 @@ def getSupportedLocales() {
 }
 
 mozilla {
-    ktfmtSourcePaths = ["src/**/*.kt", "!**/build/**/*.kt"]
+    ktfmtSourcePaths = ["src/**/*.kt", "sports/src/**/*.kt", "!**/build/**/*.kt"]
     detektSourcePaths = [
         "**/src/**/*.kt",
         "!**/build/**", "!**/resources/**", "!**/tmp/**",

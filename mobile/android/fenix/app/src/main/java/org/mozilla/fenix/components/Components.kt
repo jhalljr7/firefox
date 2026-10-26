@@ -6,13 +6,16 @@ package org.mozilla.fenix.components
 
 import android.app.Application
 import android.content.Context
+import android.net.ConnectivityManager
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.getSystemService
 import com.google.android.play.core.review.ReviewManagerFactory
 import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.MainScope
 import mozilla.components.concept.ai.controls.AIFeatureBlock
 import mozilla.components.concept.ai.controls.AIFeatureRegistry
 import mozilla.components.concept.integrity.RequestHashProvider
@@ -78,6 +81,7 @@ import org.mozilla.fenix.distributions.DistributionIdManager
 import org.mozilla.fenix.ext.asRecentTabs
 import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.ext.filterState
+import org.mozilla.fenix.ext.isOnline
 import org.mozilla.fenix.ext.sort
 import org.mozilla.fenix.home.PocketMiddleware
 import org.mozilla.fenix.home.SettingsBackedPocketSettings
@@ -89,6 +93,7 @@ import org.mozilla.fenix.home.middleware.HomeTelemetryMiddleware
 import org.mozilla.fenix.home.setup.store.DefaultSetupChecklistRepository
 import org.mozilla.fenix.home.setup.store.SetupChecklistPreferencesMiddleware
 import org.mozilla.fenix.home.setup.store.SetupChecklistTelemetryMiddleware
+import org.mozilla.fenix.home.sports.WrexhamWidgetMiddleware
 import org.mozilla.fenix.ipprotection.store.DefaultIPProtectionPromptRepository
 import org.mozilla.fenix.messaging.state.MessagingMiddleware
 import org.mozilla.fenix.nimbus.FxNimbus
@@ -104,6 +109,9 @@ import org.mozilla.fenix.search.VoiceSearchAIControlFeature
 import org.mozilla.fenix.settings.emailmasks.middleware.DefaultEmailMasksRepository
 import org.mozilla.fenix.settings.emailmasks.middleware.EmailMasksRepository
 import org.mozilla.fenix.settings.settingssearch.DefaultFenixSettingsIndexer
+import org.mozilla.fenix.sports.FakeWrexhamRepository
+import org.mozilla.fenix.sports.SportsLoader
+import org.mozilla.fenix.sports.WrexhamScenario
 import org.mozilla.fenix.termsofuse.TermsOfUseManager
 import org.mozilla.fenix.termsofuse.store.DefaultTermsOfUsePromptRepository
 import org.mozilla.fenix.utils.Settings
@@ -355,6 +363,18 @@ class Components(
                             )
                         ),
                         HomeTelemetryMiddleware(),
+                        // Wrexham AFC widget prototype: dummy data from the Secret Settings scenario, with no gap
+                        // between requests so a scenario switch shows straight away. Real data would pass a
+                        // MerinoSportsRepository here and keep the default 60s gap (see the sports module README).
+                        WrexhamWidgetMiddleware(
+                            SportsLoader(
+                                repository =
+                                    FakeWrexhamRepository { WrexhamScenario.from(settings.wrexhamWidgetScenario) },
+                                scope = MainScope(),
+                                isOnline = { context.getSystemService<ConnectivityManager>()?.isOnline() == true },
+                                minIntervalMs = 0L,
+                            )
+                        ),
                         SetupChecklistPreferencesMiddleware(DefaultSetupChecklistRepository(context, settings)),
                         SetupChecklistTelemetryMiddleware(),
                         ReviewPromptMiddleware(

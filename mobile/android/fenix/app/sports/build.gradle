@@ -1,0 +1,54 @@
+/*
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+
+// Sports widget feature module: a club-agnostic sports core (match model, data layer, celebrations,
+// match UI) plus the Wrexham AFC club widget built on it. The app module only wires it into the
+// homepage, settings and AppStore. Modelled on the :app:longfox module.
+
+plugins {
+    id 'com.android.library'
+    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.serialization)
+}
+
+android {
+    namespace 'org.mozilla.fenix.sports'
+    compileSdk {
+        version = release(config.compileSdkMajorVersion) { minorApiLevel = config.compileSdkMinorVersion }
+    }
+    defaultConfig {
+        minSdk config.minSdkVersion
+    }
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+    lint {
+        lintConfig = file("../../../shared-lint.xml")
+    }
+}
+
+dependencies {
+    implementation project(':components:compose-base')
+    implementation project(':components:support-base')
+    implementation project(':components:ui-icons')
+
+    implementation platform(libs.androidx.compose.bom)
+    implementation libs.androidx.compose.animation
+    implementation libs.androidx.compose.foundation
+    implementation libs.androidx.compose.material3
+    implementation libs.androidx.compose.ui
+    implementation libs.androidx.compose.ui.tooling.preview
+    implementation libs.androidx.core
+    implementation libs.kotlinx.coroutines
+    implementation libs.kotlinx.serialization.json
+
+    testImplementation libs.junit4
+    testImplementation libs.kotlinx.coroutines.test
+
+    debugImplementation libs.androidx.compose.ui.tooling
+}

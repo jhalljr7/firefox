@@ -834,7 +834,7 @@ acorn-detekt-rules:
     active: true
   AcornThemeUsage:
     active: true
-    excludes: ['**/theme/FirefoxTheme.kt']
+    excludes: ['**/theme/FirefoxTheme.kt', '**/sports/SportsTheme.kt']
     appThemeName: 'org.mozilla.fenix.theme.FirefoxTheme'
   MaterialButtonUsage:
     active: true

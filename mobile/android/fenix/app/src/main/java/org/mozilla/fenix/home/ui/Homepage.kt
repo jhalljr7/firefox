@@ -85,6 +85,7 @@ import org.mozilla.fenix.home.recentvisits.view.RecentlyVisited
 import org.mozilla.fenix.home.sessioncontrol.CollectionInteractor
 import org.mozilla.fenix.home.sessioncontrol.MessageCardInteractor
 import org.mozilla.fenix.home.setup.ui.SetupChecklist
+import org.mozilla.fenix.home.sports.WrexhamWidgetSection
 import org.mozilla.fenix.home.store.HeaderState
 import org.mozilla.fenix.home.store.HomepageState
 import org.mozilla.fenix.home.store.MiddleSearchState
@@ -104,7 +105,6 @@ import org.mozilla.fenix.home.topsites.store.toPopularSite
 import org.mozilla.fenix.home.topsites.ui.AddShortcutBottomSheet
 import org.mozilla.fenix.home.topsites.ui.AddShortcutDialog
 import org.mozilla.fenix.home.ui.HomepageTestTag.HOMEPAGE
-import org.mozilla.fenix.home.wrexham.ui.WrexhamWidgetSection
 import org.mozilla.fenix.theme.FirefoxTheme
 import org.mozilla.fenix.trackingprotection.TrackersBlockedCard
 import org.mozilla.fenix.utils.isLargeScreenSize
@@ -232,9 +232,9 @@ internal fun Homepage(
                                 )
                             }
 
-                            wrexhamScenario?.let {
+                            wrexhamWidgetState?.let {
                                 WrexhamWidgetSection(
-                                    scenario = it,
+                                    state = it,
                                     modifier = Modifier.padding(horizontal = horizontalMargin).padding(top = 16.dp),
                                 )
                             }

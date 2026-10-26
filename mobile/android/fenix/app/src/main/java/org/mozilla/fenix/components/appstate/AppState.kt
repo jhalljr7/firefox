@@ -31,6 +31,7 @@ import org.mozilla.fenix.messaging.MessagingState
 import org.mozilla.fenix.microsurvey.MicrosurveyState
 import org.mozilla.fenix.reviewprompt.ReviewPromptState
 import org.mozilla.fenix.reviewprompt.ReviewPromptState.Unknown
+import org.mozilla.fenix.sports.ClubWidgetState
 import org.mozilla.fenix.wallpapers.WallpaperState
 
 /**
@@ -89,6 +90,7 @@ import org.mozilla.fenix.wallpapers.WallpaperState
  * @property blockedTrackersState The [BlockedTrackersState] with data about blocked trackers.
  * @property longfoxEntryPointReady Whether the fox peek animation should play on the next homepage view.
  * @property isTabsTrayVisible Whether TabsTray is shown.
+ * @property wrexhamWidgetState Latest data for the Wrexham AFC homepage widget, or null before the first load.
  */
 data class AppState(
     val isForeground: Boolean = true,
@@ -132,4 +134,5 @@ data class AppState(
     val blockedTrackersState: BlockedTrackersState = BlockedTrackersState(),
     val longfoxEntryPointReady: Boolean = false,
     val isTabsTrayVisible: Boolean = false,
+    val wrexhamWidgetState: ClubWidgetState? = null,
 ) : State

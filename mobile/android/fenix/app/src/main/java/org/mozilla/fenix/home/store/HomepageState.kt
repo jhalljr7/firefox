@@ -27,9 +27,7 @@ import org.mozilla.fenix.home.topsites.TopSiteState
 import org.mozilla.fenix.home.topsites.calculateTopSitesRowLayout
 import org.mozilla.fenix.home.topsites.collapsedTopSitesCount
 import org.mozilla.fenix.home.ui.horizontalMargin
-import org.mozilla.fenix.home.wrexham.WrexhamFakeData
 import org.mozilla.fenix.home.wrexham.WrexhamScenario
-import org.mozilla.fenix.home.wrexham.WrexhamWidgetState
 import org.mozilla.fenix.termsofuse.store.PrivacyNoticeBannerState
 import org.mozilla.fenix.utils.Settings
 
@@ -81,7 +79,7 @@ internal sealed class HomepageState {
      * @property setupChecklistState Optional state of the setup checklist feature.
      * @property isSearchInProgress Whether search is currently active on the homepage.
      * @property bottomPadding Amount of padding to display at the bottom of the homepage.
-     * @property wrexhamWidgetState State of the Wrexham AFC widget, or null when the widget is hidden.
+     * @property wrexhamScenario Dummy-data scenario for the Wrexham AFC widget, or null when it is hidden.
      */
     internal data class Normal(
         val shouldShowPrivacyNoticeBanner: Boolean,
@@ -103,7 +101,7 @@ internal sealed class HomepageState {
         val setupChecklistState: SetupChecklistState?,
         override val isSearchInProgress: Boolean,
         val bottomPadding: Int,
-        val wrexhamWidgetState: WrexhamWidgetState? = null,
+        val wrexhamScenario: WrexhamScenario? = null,
     ) : HomepageState()
 
     val browsingMode: BrowsingMode
@@ -241,13 +239,10 @@ internal sealed class HomepageState {
                         } else {
                             BOTTOM_PADDING_BOTTOM_TOOLBAR
                         },
-                    wrexhamWidgetState =
-                        WrexhamFakeData.forScenario(
-                            WrexhamScenario.entries.firstOrNull { it.name == settings.wrexhamWidgetScenario }
-                                ?: WrexhamScenario.UPCOMING,
-                        ).takeIf {
-                            settings.enableHomepageWrexhamWidget && settings.showHomepageWrexhamWidget
-                        },
+                    wrexhamScenario =
+                        (WrexhamScenario.entries.firstOrNull { it.name == settings.wrexhamWidgetScenario }
+                                ?: WrexhamScenario.UPCOMING)
+                            .takeIf { settings.enableHomepageWrexhamWidget && settings.showHomepageWrexhamWidget },
                 )
             }
     }

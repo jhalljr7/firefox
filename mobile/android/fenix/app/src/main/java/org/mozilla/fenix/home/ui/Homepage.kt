@@ -104,8 +104,8 @@ import org.mozilla.fenix.home.topsites.store.toPopularSite
 import org.mozilla.fenix.home.topsites.ui.AddShortcutBottomSheet
 import org.mozilla.fenix.home.topsites.ui.AddShortcutDialog
 import org.mozilla.fenix.home.ui.HomepageTestTag.HOMEPAGE
-import org.mozilla.fenix.theme.FirefoxTheme
 import org.mozilla.fenix.home.wrexham.ui.WrexhamWidgetSection
+import org.mozilla.fenix.theme.FirefoxTheme
 import org.mozilla.fenix.trackingprotection.TrackersBlockedCard
 import org.mozilla.fenix.utils.isLargeScreenSize
 import org.mozilla.fenix.wallpapers.WallpaperTheme
@@ -232,9 +232,9 @@ internal fun Homepage(
                                 )
                             }
 
-                            wrexhamWidgetState?.let {
+                            wrexhamScenario?.let {
                                 WrexhamWidgetSection(
-                                    state = it,
+                                    scenario = it,
                                     modifier = Modifier.padding(horizontal = horizontalMargin).padding(top = 16.dp),
                                 )
                             }
